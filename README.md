@@ -32,7 +32,7 @@ MVP for Brain Buddy is to have a simple, yet efficient application that allows a
 
 The backend repo for Brain Buddy can be found [here](https://github.com/elysemontano/brain-buddy-backend)
 
-## Running the Backend with Ruby on Rails:
+## Running the Frontend with Next.js:
 To get the Brain Buddy backend up and running using Ruby on Rails, follow these steps:
 
 1. Clone the repository
