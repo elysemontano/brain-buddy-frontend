@@ -11,7 +11,8 @@ Brain Buddy is the ultimate companion for your learning journey!  Revolutionize 
 </p>
 
 The frontend of Brain Buddy is built using:
--  Next.js
+- Redux
+- Next.js
 - Typescript
 - Tailwind.
           
