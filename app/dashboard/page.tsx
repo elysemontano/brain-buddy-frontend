@@ -8,6 +8,8 @@ import { AppDispatch, RootState } from '@/lib/store';
 import { fetchTopics } from '../../lib/topics/topicsSlice';
 
 export default function Dashboard() {
+  const user = {id: 1, email: "test@testing.com"}
+
   const dispatch = useDispatch<AppDispatch>();
   const topics = useSelector((state: RootState) => state.topics.topics);
 
@@ -15,11 +17,13 @@ export default function Dashboard() {
     dispatch(fetchTopics());
   }, [dispatch]);
 
+  const myTopics = topics.filter(topic => user.id === topic.user_id)
+
   return (
-    <div> {/* Add a parent container if needed */}
+    <div>
       <h1 className='text-[#7C7C7C] font-bold underline px-2 text-2xl'>My Cards:</h1>
       <div className='grid xl:grid-cols-5 lg:grid-cols-4 gap-1 md:grid-cols-3 sm:grid-cols-2 xs:grid-flow-col'>
-        {topics.map((topic: { name: string; description: string }, index: React.Key | null | undefined) => {
+        {myTopics.map((topic: { name: string; description: string }, index: React.Key | null | undefined) => {
           return <DashboardCards key={index} topic={topic} />;
         })}
         <div className='flex items-center'>
