@@ -5,11 +5,10 @@ export const fetchTopics = createAsyncThunk(
   async () => {
     const response = await fetch('http://localhost:3000/topics');
     const data = await response.json();
-    return data; // Assuming the response data is an array of topics
+    return data; 
   }
 );
 
-// Define the initial state
 interface TopicState {
   topics: Topic[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -30,7 +29,6 @@ const initialState: TopicState = {
   error: null,
 };
 
-// Define the topic slice
 const topicSlice = createSlice({
   name: 'topics',
   initialState,

@@ -1,10 +1,13 @@
+"use client"
+
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useGetUserQuery } from '../../lib/authApi';
 
 export default function NavBar() {
-  const user = {email: "test@testing.com"}
-  // const user = ''
+  // const user = {id: 1, email: "test@example.com"}
+  const { data: user, isLoading, isError } = useGetUserQuery();
   return (
     <nav className="flex flex-row navbar bg-base-100 justify-between">
       <Link href='/'>      

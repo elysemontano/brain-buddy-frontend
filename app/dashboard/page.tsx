@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from '@/lib/store';
 import { fetchTopics } from '../../lib/topics/topicsSlice';
 
 export default function Dashboard() {
-  const user = {id: 1, email: "test@testing.com"}
+  // const user = {id: 1, email: "test@testing.com"}
 
   const dispatch = useDispatch<AppDispatch>();
   const topics = useSelector((state: RootState) => state.topics.topics);

@@ -1,9 +1,11 @@
 "use client"
 
 import {useState, ChangeEvent, FormEvent} from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import BuddyLogo from '../components/BuddyLogo'
 import Link from 'next/link'
 import router, { useRouter } from 'next/router';
+import { useLoginMutation } from '../../lib/authApi';
 
 interface FormData {
   email: string,
@@ -16,7 +18,7 @@ export default function LogIn() {
     email: '',
     password: '',
   });
-
+  const [loginMutation, { isLoading, isError }] = useLoginMutation();
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -25,9 +27,18 @@ export default function LogIn() {
     }));
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+
+    try {
+      // Call the login mutation function with the user's credentials
+      await loginMutation(formData);
+      // Handle success, such as redirecting to a dashboard page
+      onSuccess();
+    } catch (error) {
+      // Handle error, such as displaying an error message
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -40,9 +51,13 @@ export default function LogIn() {
       <form>
           <input id="email" className="mt-6 py-2 px-16 rounded-md text-center text-[#7C7C7C]" type="text" placeholder='Email' name="email" onChange={handleChange} value={formData.email} />
           <input id="password" className="mt-4 py-2 px-16 rounded-md text-center text-[#7C7C7C]" type="password" placeholder='Password' name="password" onChange={handleChange} value={formData.password} />      
-          <button className="mt-8 btn border-none text-white bg-[#1F4591] btn-md mb-4 drop-shadow-lg w-36 hover:text-[#1F4591]">Sign Up</button>
+          <button className="mt-8 btn border-none text-white bg-[#1F4591] btn-md mb-4 drop-shadow-lg w-36 hover:text-[#1F4591]" onClick={handleSubmit}>Log In</button>
         </form>
     </div> 
   </main>
   )
 }
+function onSuccess() {
+  throw new Error('Function not implemented.')
+}
+
